@@ -1,13 +1,17 @@
 CC = gcc
-CFLAGS = -Wall
-LIBS = -lGL -lGLEW -lglfw -lGLU -lglut -lm
-SRC_DIR = src
-INC_DIR = include
+CFLAGS = -Wall -Iinclude
+LDFLAGS = -lGLEW -lglfw -lGL -lm -lglut
+SOURCES = src/main.c src/fluid_simulation.c src/shader_utils.c src/particle.c src/text_rendering.c
+OBJECTS = $(SOURCES:.c=.o)
+EXECUTABLE = fluid_simulation
 
-all: fluid_simulation
+all: $(EXECUTABLE)
 
-fluid_simulation: $(SRC_DIR)/main.c $(SRC_DIR)/particle.c $(SRC_DIR)/shader_utils.c $(SRC_DIR)/text_rendering.c
-	$(CC) $(CFLAGS) -I$(INC_DIR) $^ -o $@ $(LIBS)
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(OBJECTS) -o $@ $(LDFLAGS)
+
+src/%.o: src/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f fluid_simulation
+	rm -f $(OBJECTS) $(EXECUTABLE)
