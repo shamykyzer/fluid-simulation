@@ -62,8 +62,23 @@ Run the compiled executable:
 
 ## Code Structure
 
-- **`main.c`:** Main program logic and rendering loop.
-- **`particle.h`:** Particle structure and update functions.
+
+├── shaders/                  # Shader files used in the simulation
+│   ├── advect.frag           # Fragment shader for advection
+│   ├── advect.vert           # Vertex shader for advection
+│   ├── shader.frag           # Main fragment shader for rendering
+│   └── shader.vert           # Main vertex shader for rendering
+│
+├── src/                      # Source files for the project
+│   ├── fluid_simulation.c    # Core logic for fluid simulation
+│   ├── main.c                # Entry point of the application
+│   ├── particle.c            # Implementation of particle-related functions
+│   ├── shader_utils.c        # Implementation of shader utility functions
+│   └── text_rendering.c      # Implementation for text rendering
+│
+├── Makefile                  # Instructions for building the project
+└── fluid_simulation          # Compiled executable of the simulation
+
 
 ## References
 
