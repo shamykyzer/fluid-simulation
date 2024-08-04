@@ -84,7 +84,7 @@ Run the compiled executable:
 │
 ├── Makefile                  # Instructions for building the project
 └── fluid_simulation          # Compiled executable of the simulation
-
+```
 
 ## References
 
