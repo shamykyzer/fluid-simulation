@@ -1,50 +1,70 @@
 # Fluid Simulation
 
-This project is a fluid simulation implemented using OpenGL and GLFW. It visualizes particles moving in a fluid-like manner, with various interactive controls to modify the simulation parameters.
+This project is a fluid simulation using OpenGL and GLFW. It visualizes particles moving in a fluid-like manner, with interactive controls to modify the simulation.
 
-## Table of Contents
-- [Introduction](#introduction)
-- [Dependencies](#dependencies)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Controls](#controls)
-- [Code Structure](#code-structure)
-- [References](#references)
+## Features
 
-## Introduction
+- **Interactive Particle Dynamics:** Use the mouse to influence particle movement.
+- **Customizable Simulation Parameters:** Adjust particle count, size, and speed with keyboard controls.
+- **Collision Detection:** Simulates basic collisions between particles and window borders.
+- **Real-time Rendering:** Uses OpenGL for fast rendering.
 
-Fluid simulation is a technique used in computer graphics to simulate the behavior of fluids such as water, smoke, and fire. This project demonstrates a basic fluid simulation using particles.
+## Getting Started
 
-For more information on fluid simulation, visit the [Wikipedia page](https://en.wikipedia.org/wiki/Fluid_simulation).
+### Prerequisites
 
-## Dependencies
+- [OpenGL](https://www.opengl.org/)
+- [GLFW](https://www.glfw.org/)
+- [GLEW](http://glew.sourceforge.net/)
+- [GLUT](https://www.opengl.org/resources/libraries/glut/)
 
-This project depends on the following libraries:
-- [OpenGL](https://en.wikipedia.org/wiki/OpenGL)
-- [GLFW](https://en.wikipedia.org/wiki/GLFW)
-- [GLEW](https://en.wikipedia.org/wiki/OpenGL_Extension_Wrangler_Library)
-- [GLUT](https://en.wikipedia.org/wiki/OpenGL_Utility_Toolkit)
+### Installation
 
-## Installation
+1. **Clone the Repository:**
 
-1. Clone the repository:
-    ```sh
-    git clone https://github.com/yourusername/fluid-simulation.git
-    cd fluid-simulation
-    ```
+   ```sh
+   git clone https://github.com/yourusername/fluid-simulation.git
+   cd fluid-simulation
+   ```
 
-2. Install the required libraries:
-    ```sh
-    sudo apt-get install libglfw3-dev libglew-dev freeglut3-dev
-    ```
+2. **Install Required Libraries:**
 
-3. Compile the project:
-    ```sh
-    make
-    ```
+   On Ubuntu or Debian-based systems, run:
 
-## Usage
+   ```sh
+   sudo apt-get install libglfw3-dev libglew-dev freeglut3-dev
+   ```
+
+3. **Compile the Project:**
+
+   ```sh
+   make
+   ```
+
+### Usage
 
 Run the compiled executable:
+
 ```sh
 ./fluid_simulation
+```
+
+### Controls
+
+- **Mouse Interaction:**
+  - **Left Click:** Attract particles toward the mouse position.
+- **Keyboard Controls:**
+  - **`+`**: Increase particle size
+  - **`-`**: Decrease particle size
+  - **`W`**: Increase particle count
+  - **`S`**: Decrease particle count
+- **Scroll Wheel:** Adjust speed
+
+## Code Structure
+
+- **`main.c`:** Main program logic and rendering loop.
+- **`particle.h`:** Particle structure and update functions.
+
+## References
+
+For more on fluid simulation, see the [Wikipedia page](https://en.wikipedia.org/wiki/Fluid_simulation).
