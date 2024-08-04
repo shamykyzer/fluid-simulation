@@ -60,9 +60,12 @@ Run the compiled executable:
   - **`S`**: Decrease particle count
 - **Scroll Wheel:** Adjust speed
 
+
 ## Code Structure
 
-
+```plaintext
+Fluid Simulation
+│
 ├── shaders/                  # Shader files used in the simulation
 │   ├── advect.frag           # Fragment shader for advection
 │   ├── advect.vert           # Vertex shader for advection
@@ -78,6 +81,7 @@ Run the compiled executable:
 │
 ├── Makefile                  # Instructions for building the project
 └── fluid_simulation          # Compiled executable of the simulation
+
 
 
 ## References
