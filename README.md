@@ -23,7 +23,7 @@ This project is a fluid simulation using OpenGL and GLFW. It visualizes particle
 1. **Clone the Repository:**
 
    ```sh
-   git clone https://github.com/yourusername/fluid-simulation.git
+   git clone https://github.com/shamykyzer/fluid-simulation.git
    cd fluid-simulation
    ```
 
