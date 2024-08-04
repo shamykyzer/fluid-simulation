@@ -3,6 +3,6 @@
 #define TEXT_RENDERING_H
 
 void renderText(float x, float y, const char* text);
-void renderTextLines(float x, float startY, float lineHeight, const char* texts[], int count);
+void renderInstructions();
 
 #endif // TEXT_RENDERING_H

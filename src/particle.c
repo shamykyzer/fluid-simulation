@@ -1,49 +1,75 @@
 #include "particle.h"
 #include <stdlib.h>
+#include <time.h>
 #include <math.h>
 
 // Initialize particles with random positions and velocities
 void initParticles(Particle* particles, int numParticles) {
+    srand(time(NULL));
     for (int i = 0; i < numParticles; ++i) {
-        // Set initial position of particle to a random point within [-1, 1] range
         particles[i].x = ((float)rand() / RAND_MAX) * 2.0f - 1.0f;
         particles[i].y = ((float)rand() / RAND_MAX) * 2.0f - 1.0f;
-        
-        // Set initial velocity of particle to a random value within [-0.01, 0.01] range
-        particles[i].vx = ((float)rand() / RAND_MAX) * 0.02f - 0.01f;
-        particles[i].vy = ((float)rand() / RAND_MAX) * 0.02f - 0.01f;
+        particles[i].vx = ((float)rand() / RAND_MAX) * 0.01f - 0.005f;
+        particles[i].vy = ((float)rand() / RAND_MAX) * 0.01f - 0.005f;
+        particles[i].r = 0.0f;
+        particles[i].g = 0.0f;
+        particles[i].b = 1.0f;
     }
 }
 
-// Update particles based on mouse position, viscosity, trail length, and speed factor
-void updateParticles(Particle* particles, int numParticles, float mouseX, float mouseY, float viscosity, int trailLength, float speedFactor) {
+// Update particle positions randomly
+void updateParticles(Particle* particles, int numParticles, float speedFactor, int mousePressed, double mouseX, double mouseY) {
     for (int i = 0; i < numParticles; ++i) {
-        // Calculate distance from particle to mouse position
-        float dx = mouseX - particles[i].x;
-        float dy = mouseY - particles[i].y;
-        float distance = sqrt(dx * dx + dy * dy);
-        
-        // Prevent division by zero or very small distances
-        if (distance < 0.1f) distance = 0.1f;
+        if (mousePressed) {
+            particles[i].vx += (mouseX - particles[i].x) * 0.01f;
+            particles[i].vy += (mouseY - particles[i].y) * 0.01f;
+        } else {
+            particles[i].x += particles[i].vx * speedFactor;
+            particles[i].y += particles[i].vy * speedFactor;
+        }
 
-        // Update particle velocity based on distance to mouse and speed factor
-        particles[i].vx += (dx / distance) * 0.001f * speedFactor;
-        particles[i].vy += (dy / distance) * 0.001f * speedFactor;
+        // Wrap around the screen edges
+        if (particles[i].x > 1.0f) particles[i].x = -1.0f;
+        if (particles[i].x < -1.0f) particles[i].x = 1.0f;
+        if (particles[i].y > 1.0f) particles[i].y = -1.0f;
+        if (particles[i].y < -1.0f) particles[i].y = 1.0f;
 
-        // Update particle position based on velocity
-        particles[i].x += particles[i].vx;
-        particles[i].y += particles[i].vy;
-
-        // Apply viscosity to slow down particles over time
-        particles[i].vx *= viscosity;
-        particles[i].vy *= viscosity;
-
-        // Bounce particles off the edges of the screen
+        // Check for collisions with window borders
         if (particles[i].x > 1.0f || particles[i].x < -1.0f) {
-            particles[i].vx *= -0.9f; // Reverse and dampen velocity in x direction
+            particles[i].vx = -particles[i].vx;
+            particles[i].r = 1.0f;
+            particles[i].g = 0.0f;
+            particles[i].b = 0.0f;
         }
         if (particles[i].y > 1.0f || particles[i].y < -1.0f) {
-            particles[i].vy *= -0.9f; // Reverse and dampen velocity in y direction
+            particles[i].vy = -particles[i].vy;
+            particles[i].r = 1.0f;
+            particles[i].g = 0.0f;
+            particles[i].b = 0.0f;
+        }
+
+        // Check for collisions with other particles
+        for (int j = i + 1; j < numParticles; ++j) {
+            float dx = particles[i].x - particles[j].x;
+            float dy = particles[i].y - particles[j].y;
+            float distance = sqrt(dx * dx + dy * dy);
+            if (distance < 0.01f) { // Adjust this value based on particle size
+                // Simple elastic collision response
+                float tempVx = particles[i].vx;
+                float tempVy = particles[i].vy;
+                particles[i].vx = particles[j].vx;
+                particles[i].vy = particles[j].vy;
+                particles[j].vx = tempVx;
+                particles[j].vy = tempVy;
+
+                // Turn both particles red
+                particles[i].r = 1.0f;
+                particles[i].g = 0.0f;
+                particles[i].b = 0.0f;
+                particles[j].r = 1.0f;
+                particles[j].g = 0.0f;
+                particles[j].b = 0.0f;
+            }
         }
     }
 }

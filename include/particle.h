@@ -4,9 +4,10 @@
 typedef struct {
     float x, y;
     float vx, vy;
+    float r, g, b; // Color components
 } Particle;
 
 void initParticles(Particle* particles, int numParticles);
-void updateParticles(Particle* particles, int numParticles, float mouseX, float mouseY, float viscosity, int trailLength, float speedFactor);
+void updateParticles(Particle* particles, int numParticles, float speedFactor, int mousePressed, double mouseX, double mouseY);
 
 #endif
