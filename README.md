@@ -64,6 +64,11 @@ Run the compiled executable:
 ## Code Structure
 
 ```plaintext
+┌── include/                  # Header files for the project
+│   ├── particle.h            # Defines the Particle structure and functions
+│   ├── shader_utils.h        # Utility functions for handling shaders
+│   └── text_rendering.h      # Functions and definitions for rendering text
+│
 ├── shaders/                  # Shader files used in the simulation
 │   ├── advect.frag           # Fragment shader for advection
 │   ├── advect.vert           # Vertex shader for advection
