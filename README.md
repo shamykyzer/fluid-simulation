@@ -64,8 +64,6 @@ Run the compiled executable:
 ## Code Structure
 
 ```plaintext
-Fluid Simulation
-│
 ├── shaders/                  # Shader files used in the simulation
 │   ├── advect.frag           # Fragment shader for advection
 │   ├── advect.vert           # Vertex shader for advection
@@ -81,7 +79,6 @@ Fluid Simulation
 │
 ├── Makefile                  # Instructions for building the project
 └── fluid_simulation          # Compiled executable of the simulation
-
 
 
 ## References
