@@ -1,22 +1,17 @@
 CC = gcc
-CFLAGS = -Wall -g -I.
-LIBS = -lGL -lGLEW -lglfw -lGLU -lGLUT
+CFLAGS = -Wall -Iinclude
+LDFLAGS = -lGLEW -lglfw -lGL -lm -lglut -lGLU
+SOURCES = src/main.c src/fluid_simulation.c src/shader_utils.c src/particle.c src/text_rendering.c
+OBJECTS = $(SOURCES:.c=.o)
+EXECUTABLE = fluid_simulation
 
-# Source files
-SRC = main.c particle.c shader_utils.c text_rendering.c fluid_simulation.c
-# Object files
-OBJ = $(SRC:.c=.o)
-# Executable
-EXEC = fluid_simulation
+all: $(EXECUTABLE)
 
-# Default target
-all: $(EXEC)
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(OBJECTS) -o $@ $(LDFLAGS)
 
-$(EXEC): $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $<
+src/%.o: src/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) $(EXEC)
+	rm -f $(OBJECTS) $(EXECUTABLE)

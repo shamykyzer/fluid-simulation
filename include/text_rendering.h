@@ -1,4 +1,3 @@
-// text_rendering.h
 #ifndef TEXT_RENDERING_H
 #define TEXT_RENDERING_H
 
